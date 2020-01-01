@@ -25,6 +25,14 @@ class SelectionSorter(Sorter):
     _check() -> book  Checks if array in memory is sorted
     """
 
+    def __min(self, arr: list) -> int:
+        """Finds the minimum in an array linearly"""
+        mn = arr[0]
+        for i in arr:
+            if mn > i:
+                mn = i
+        return mn
+
     def sort(self) -> list:
         """Sorts loaded data from least to most, and return sorted array"""
         super().sort()
@@ -34,7 +42,7 @@ class SelectionSorter(Sorter):
             # Find the index of the maximum value in the set from the position
             # of i to the end of the array
 
-            minIndexSub = self.data[indx:].index(min(self.data[indx:]))
+            minIndexSub = self.data[indx:].index(self.__min(self.data[indx:]))
             minIndex = minIndexSub+indx
 
             # OK.... This mess will take a bit of explanation.
