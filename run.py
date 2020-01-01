@@ -3,10 +3,30 @@ import random
 
 print("Making list...")
 aList = []
-for _ in range(int(3e4)):
+length = 1e4
+for _ in range(int(length)):
     aList.append(random.randint(0, 1000))
 
 print("Running sort...")
-print(sort.sort(aList, "selection", True)[1])
-print(sort.sort(aList, "insertion", True)[1])
+selRes, selTime = sort.sort(aList.copy(), "selection", True)
+insRes, insTime = sort.sort(aList.copy(), "insertion", True)
+shlRes, shlTime = sort.sort(aList.copy(), "shell", True)
+breakpoint()
 
+print("Verifying...")
+verified = selRes == insRes
+
+print("""
+-=-=-=-=-=-=-=-=-=-=-=-=-=
+Sorting Result Comparison
+-=-=-=-=-=-=-=-=-=-=-=-=-=
+Run result is {0}.
+Task length: {1} values.
+
+----------------------------
+Sort Type         | Time
+----------------------------
+Selection Sorting | {2:.5f}s
+Insertion Sorting | {3:.5f}s
+----------------------------
+""".format("verified" if verified else "unverified", length, selTime, insTime))
