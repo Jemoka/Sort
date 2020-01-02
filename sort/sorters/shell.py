@@ -8,7 +8,7 @@ from .sorter import Sorter
 
 class ShellSorter(Sorter):
     """
-    (factor of 4) Shell Sort
+    (factor of 3) Shell Sort
     -=-=-=-=-=-=-=
     A much much much much much much faster algorithm that
     not only takes the advantage of insertion sort, but
@@ -32,8 +32,14 @@ class ShellSorter(Sorter):
         super().sort()
 
         h = 1
-        while h < len(self.data)/4:
-            h = int(4*h)
+        while h < len(self.data)/3:
+            h = int(3*h)
+
+        # This code is not implemented correctly.
+        # Although it sorts, it does not do so in
+        # the expected speed.
+        # Please do not use this as your reference!
+        # If you know how to fix it, pull request'em.
 
         while h >= 1:
             for pointerIndx in range(1, len(self.data), h):
@@ -45,7 +51,7 @@ class ShellSorter(Sorter):
                             break
                     except IndexError:
                         break
-            h = int(h/4)
+            h = int(h/3)
 
         # Check the sorting
         assert self._check(), "This algorithm has done goof!"
